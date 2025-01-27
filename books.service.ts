@@ -20,6 +20,5 @@ export class BooksService {
   create(book: Book){
       this.books.push(book);
       return book;
-
     }
   }
