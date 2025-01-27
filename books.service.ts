@@ -28,5 +28,14 @@ export class BooksService {
       book.status = BookStatus.LENT_OUT;
       return book;
     }
+  delete(id: string): void{
+    const initialLength = this.books.length;
+    this.books = this.books.filter((book) => book.id !== id);
+     if (this.books.length === initialLength) {
+         throw new Error('Book with ID ${id} not found');
+
+       }
+
+    }
 }
 
