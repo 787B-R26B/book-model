@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Param } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param, Patch } from '@nestjs/common';
 import { BookStatus } from './book-status.enum';
 import { Book } from './book.model';
 import { BooksService } from './books.service';
@@ -28,6 +28,12 @@ export class BooksController {
         };
 
         return this.booksService.create(book);
+
+    }
+
+  @Patch(':id')
+  updateStatus(@Param('id') id: string): Book {
+      return this.booksService.updateStatus(id);
 
     }
 }

@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Book } from './book.model';
+import { BookStatus } from './book-status.enum'
 
 @Injectable()
 export class BooksService {
@@ -21,4 +22,11 @@ export class BooksService {
       this.books.push(book);
       return book;
     }
-  }
+
+  updateStatus(id: string): Book {
+      const book = this.findById(id);
+      book.status = BookStatus.LENT_OUT;
+      return book;
+    }
+}
+
