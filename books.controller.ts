@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Param } from '@nestjs/common';
 import { BookStatus } from './book-status.enum';
 import { Book } from './book.model';
 import { BooksService } from './books.service';
@@ -6,6 +6,17 @@ import { BooksService } from './books.service';
 @Controller('books')
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
+
+  @Get()
+  findAll(){
+      return this.booksService.findAll();
+    }
+
+  @Get(':id')
+  findById(@Param('id') id: string): Book {
+    return this.booksService.findById(id);
+
+    }
 
   @Post()
   create(@Body('id') id: string, @Body('name') name: string): Book {
@@ -15,6 +26,7 @@ export class BooksController {
           status: BookStatus.RENTABLE,
 
         };
+
         return this.booksService.create(book);
 
     }
